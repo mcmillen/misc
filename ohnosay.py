@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import unicode_literals, print_function
 
 # MIT License
 #
@@ -71,7 +72,7 @@ def chunk_lines(s):
 def main(args):
   """does some things. oh no"""
   if not args:
-    print USAGE
+    print(USAGE)
     return
 
   single_panel = False
@@ -102,13 +103,13 @@ def main(args):
   # now both lines are the same length
   num_lines = len(lines_1)
 
-  comic = re.sub('-', u'\u203e', TEMPLATE).split('\n')
-  oh_no = re.sub('-', u'\u203e', OH_NO).split('\n')
+  comic = re.sub('-', '\u203e', TEMPLATE).split('\n')
+  oh_no = re.sub('-', '\u203e', OH_NO).split('\n')
 
   # this got hacky and gross. oh no
   for i, _ in enumerate(comic):
     if i == 2:
-      for j in xrange(num_lines):
+      for j in range(num_lines):
         left_centered = lines_1[j].center(len(TO_REPLACE))
         left = re.sub(TO_REPLACE, left_centered, comic[2])
         middle_centered = lines_2[j].center(len(TO_REPLACE))
@@ -116,21 +117,21 @@ def main(args):
         if single_panel:
           middle = ''
         if j == num_lines - 3:
-          print left + middle + oh_no[1]
+          print(left + middle + oh_no[1])
         elif j == num_lines - 2:
-          print left + middle + '  | oh   |'
+          print(left + middle + '  | oh   |')
         elif j == num_lines - 1:
-          print left + middle + '  |   no |'
+          print(left + middle + '  |   no |')
         else:
-          print left + middle
+          print(left + middle)
     else:
       oh_no_line = oh_no[i]
       if num_lines > 2 and i == 1:
         oh_no_line = ''
       if single_panel:
-        print comic[i] + oh_no_line
+        print(comic[i] + oh_no_line)
       else:
-        print comic[i] + comic[i] + oh_no_line
+        print(comic[i] + comic[i] + oh_no_line)
 
 
 if __name__ == '__main__':
